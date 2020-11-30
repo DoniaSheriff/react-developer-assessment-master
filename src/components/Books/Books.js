@@ -3,6 +3,7 @@ import 'antd/dist/antd.css';
 import './Books.module.css';
 import {List} from 'antd';
 import data from '../../mock/data.json';
+import moment from 'moment';
 
 class Books extends Component {
   constructor() {
@@ -27,7 +28,7 @@ class Books extends Component {
       this.listData.push({
         Title: element.title,
         Id: element.id,
-        PublishDate: element.publishDate,
+        PublishDate:  moment(element.publishDate).format('DD/MM/YYYY hh:mm A'),
         Summary: element.summary,
         Author: element.author,
         Categories: element.categories
