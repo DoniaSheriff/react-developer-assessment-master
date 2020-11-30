@@ -1,18 +1,5 @@
 import React from 'react';
 import CheckBox from "./../CheckBox/CheckBox";
- 
-// const CheckBoxGroup = () => (
-//   <div className={styles.CheckBoxGroup}>
-//     CheckBoxGroup Component
-//   </div>
-// );
-
-// CheckBoxGroup.propTypes = {};
-
-// CheckBoxGroup.defaultProps = {};
-
-// export default CheckBoxGroup;
-
 
 export default ({ options, ...props }) => (
   <div

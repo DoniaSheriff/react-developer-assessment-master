@@ -3,10 +3,6 @@ import Books from "../Books/Books";
 import CheckBoxGroup from "../CheckBoxGroup/CheckBoxGroup";
 import data from '../../mock/data.json';
 import {  Divider } from 'antd'
-// const options1 = ["Apple", "Pear", "Orange"];
-// const options2 = ["Strawberry", "Grape", "Mango"];
-// const options3 = ["Kiwi", "Banana", "Cherry"];
-
 export default class MainPage extends Component {
 
   // state = {};
