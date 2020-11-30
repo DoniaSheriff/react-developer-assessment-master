@@ -3,39 +3,41 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import data from '../../mock/data.json';
-import { PageHeader, Button, Menu, Dropdown } from 'antd';
-import Checkbox from 'antd/lib/checkbox/Checkbox';
+import { PageHeader, Button, Menu, Dropdown , Checkbox , Row, Col  } from 'antd';
 class Header extends Component {
   constructor() {
     super();
     this.state = {
       initLoading: true,
       loading: false,
-      cateogries: [],
+      categories: [],
     };
-    this.cateogries = [];
+    this.categories = [];
   }
   componentDidMount() {
-
+    this.retrieveCategory();
   }
   retrieveCategory() {
     data.posts.map((element) =>
     {
-      element.cateogries.map((category) =>
+      if(element.categories)
+      {
+        element.categories.map((category) =>
       {
         if (
-          this.cateogries &&
-          this.cateogries.find((x) => x.name == category.name)
+          this.categories &&
+          this.categories.find((x) => x.name == category.name)
         )
           console.log(category.name + ' already exists');
         else
-          this.cateogries.push({ name: category.name, value: true });
+          this.categories.push({ name: category.name, value: true });
       });
+      }
     });
 
 
     this.setState({
-      cateogries: this.cateogries,
+      categories: this.categories,
     });
   }
   onChange() {}
@@ -47,16 +49,29 @@ class Header extends Component {
         title="Books List"
         extra={[
           // <Dropdown overlay={menu}></Dropdown>,
-          // <Checkbox.Group
-          //   options={
-          //     this.state.cateogries ?
-          //       this.state.cateogries.map(column =>
-          //         (
-          //           { label: column.name, value: column.value }
-          //         ))
-          //     : null
-          //   }
-          //   onChange={this.onChange} />,
+          <Checkbox.Group
+            options={
+              this.state.categories ?
+                this.state.categories.map(
+                  column =>
+                  (
+                    { label: column.name, value: column.value }
+                  ))
+              : null
+            }
+            onChange={this.onChange} >
+            {/* <Row>
+              {
+                this.categories.forEach(element => {
+                  <Col span={8}>
+                    <Checkbox value ={element.value}>
+                      { element.name}
+                    </Checkbox>
+                  </Col>
+                })
+              }
+            </Row> */}
+            </Checkbox.Group>,
           <Button key="1" type="primary">
             Primary
           </Button>,
