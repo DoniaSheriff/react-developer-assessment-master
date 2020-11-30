@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import Books from "../Books/Books";
-import CheckBoxGroup from "../CheckBoxGroup/CheckBoxGroup";
+import React, { Component } from 'react';
+import Books from '../Books/Books';
+import CheckBoxGroup from '../CheckBoxGroup/CheckBoxGroup';
 import data from '../../mock/data.json';
-import {  Divider } from 'antd'
+import { Divider, PageHeader } from 'antd';
+import './MainPage.module.css'
 export default class MainPage extends Component {
-
   // state = {};
   constructor() {
     super();
@@ -16,11 +16,10 @@ export default class MainPage extends Component {
     this.categories = [];
   }
 
-
   handleChange = ({ target: { label, checked } }) =>
     this.setState({ [label]: checked });
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
 
     alert(JSON.stringify(this.state.categories, null, 4));
@@ -34,7 +33,7 @@ export default class MainPage extends Component {
         element.categories.map((category) => {
           if (
             !this.categories ||
-            !this.categories.find((x) => x == category.name)
+            !this.categories.find((x) => x === category.name)
           )
             this.categories.push(category.name);
         });
@@ -45,22 +44,31 @@ export default class MainPage extends Component {
     });
   }
   render = () => (
-    <form onSubmit={this.handleSubmit}>
-      <div style={{ marginLeft: 20 }}>
-        <CheckBoxGroup
-          {...this.state}
-          options={this.state.categories}
-          handleChange={this.handleChange}
+    <div>
+      <div style={{  background: "lightseagreen"}}>
+        <PageHeader
+          className="site-page-header-responsive"
+          title="Books List"
+          backIcon=""
         />
-
+        <div style={{ marginLeft: 20 }}>
+          <CheckBoxGroup
+            {...this.state}
+            options={this.state.categories}
+            handleChange={this.handleChange}
+          />{' '}
+          <Divider />
+        </div>
+      </div>
+      <form onSubmit={this.handleSubmit}>
         {/* <div style={{ marginTop: 20 }}>
           <button className="ant-btn ant-btn-primary" type="submit">
             Submit
         </button>
         </div> */}
- <Divider />
-      </div>
-      <Books />
-    </form>
+
+        <Books />
+      </form>
+    </div>
   );
 }
