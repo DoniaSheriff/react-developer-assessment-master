@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './Books.module.css';
-import { List, Avatar, Button, Skeleton, PageHeader } from 'antd';
+import {List} from 'antd';
 import data from '../../mock/data.json';
 
 class Books extends Component {
@@ -49,6 +48,7 @@ class Books extends Component {
   }
   render() {
     return (
+      
       <List
         itemLayout="vertical"
         size="large"
@@ -87,5 +87,4 @@ class Books extends Component {
     )
   }
 }
-
 export default Books;
