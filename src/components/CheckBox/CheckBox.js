@@ -1,10 +1,9 @@
 import React from "react";
 import { Checkbox } from "antd";
 
-export default ({ disabled, label, value, handleChange }) => (
+export default ({  label, value, handleChange }) => (
   <Checkbox
     style={{ display: "inline-block" ,marginLeft:0   }}
-    disabled={disabled || false}
     label={label}
     checked={value}
     onChange={handleChange}

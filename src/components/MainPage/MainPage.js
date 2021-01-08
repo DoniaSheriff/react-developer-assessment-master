@@ -12,17 +12,20 @@ export default class MainPage extends Component {
       initLoading: true,
       loading: false,
       categories: [],
+      CheckedList:[]
     };
     this.categories = [];
+    this.CheckedList = [];
   }
 
-  handleChange = ({ target: { label, checked } }) =>
-    this.setState({ [label]: checked });
-
+  handleChange = ({ target: { label, checked } }) => {
+    this.CheckedList.push(label);
+    this.setState({ [label]: checked, CheckedList:  this.CheckedList });
+  }
   handleSubmit = (e) => {
     e.preventDefault();
 
-    alert(JSON.stringify(this.state.categories, null, 4));
+    alert(JSON.stringify(this.state.CheckedList, null, 4));
   };
   componentDidMount() {
     this.retrieveCategory();
@@ -61,13 +64,13 @@ export default class MainPage extends Component {
         </div>
       </div>
       <form onSubmit={this.handleSubmit}>
-        {/* <div style={{ marginTop: 20 }}>
+        <div style={{ marginTop: 20 }}>
           <button className="ant-btn ant-btn-primary" type="submit">
             Submit
         </button>
-        </div> */}
+        </div>
 
-        <Books />
+        <Books filters={this.state.CheckedList}/>
       </form>
     </div>
   );

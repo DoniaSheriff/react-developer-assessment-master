@@ -6,8 +6,8 @@ import data from '../../mock/data.json';
 import moment from 'moment';
 
 class Books extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       initLoading: true,
       loading: false,
@@ -49,7 +49,6 @@ class Books extends Component {
   }
   render() {
     return (
-      
       <List
         itemLayout="vertical"
         size="large"
