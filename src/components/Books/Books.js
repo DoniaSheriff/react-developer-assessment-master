@@ -1,54 +1,66 @@
-import React, { Component } from 'react';
+import {React,  Component} from 'react';
 import 'antd/dist/antd.css';
 import './Books.module.css';
-import {List} from 'antd';
+import { List } from 'antd';
 import data from '../../mock/data.json';
 import moment from 'moment';
 
-class Books extends Component {
-  constructor(props) {
-    super(props);
+export default class Books extends Component {
+  constructor() {
+    super();
     this.state = {
-      initLoading: true,
-      loading: false,
       listData: [],
       cateogries: [],
+      pageSize: 10,
+      totalCount: 0,      
     };
     this.listData = [];
-    this.pageSize = 10;
-    this.totalCount = 0;
     this.cateogries = [];
-
   }
-  retrieveBookList(pageNumber) {
-    var startIndex = (pageNumber - 1) * this.pageSize;
-    var endIndex = (this.pageSize + startIndex);
+  retrieveAllBookList(pageNumber) {
+    this.setState({listData:[]});
+    var startIndex = (pageNumber - 1) * this.state.pageSize;
+    var endIndex = (this.state.pageSize + startIndex);
     this.totalCount = data.posts.length;
-    data.posts.slice(startIndex, endIndex).map((element) => {
-      this.listData.push({
-        Title: element.title,
-        Id: element.id,
-        PublishDate:  moment(element.publishDate).format('DD/MM/YYYY hh:mm A'),
-        Summary: element.summary,
-        Author: element.author,
-        Categories: element.categories
+    if (data && data.posts) {
+        data.posts.slice(startIndex, endIndex).map((element) => {
+          this.listData.push({
+            Title: element.title,
+            Id: element.id,
+            PublishDate: moment(element.publishDate).format('DD/MM/YYYY hh:mm A'),
+            Summary: element.summary,
+            Author: element.author,
+            Categories: element.categories
+          });
+          return true;
+
+        });
+      this.setState({
+        listData: this.listData,
+        totalCount :this.totalCount
       });
-    });
+    }
+  }
+  componentDidMount() {
+    this.retrieveAllBookList(1);
     this.setState({
-      initLoading: false,
       listData: this.listData,
     });
   }
-
-  componentDidMount() {
-    this.retrieveBookList(1);
-    this.setState({
-      initLoading: false,
-      listData: this.listData,
-    });
+  // componentWillReceiveProps() {
+  //    this.retrieveAllBookList(1);
+  // }
+  // componentDidUpdate() {
+  //   if(this.props.filters.length>0 && this.categoryFlag )
+  //   {
+  //     this.retrieveAllBookList(1);
+  //   }
+  // }
+  retrieveSpecificCategory() {
   }
   render() {
     return (
+      <div>
       <List
         itemLayout="vertical"
         size="large"
@@ -58,10 +70,10 @@ class Books extends Component {
               listData: [],
             });
             this.listData = [];
-            this.retrieveBookList((page));
+            this.retrieveAllBookList((page));
           },
-          pageSize: 10,
-          total: this.totalCount
+          pageSize: this.state.pageSize,
+          total: this.state.totalCount
         }}
         dataSource={this.state.listData}
 
@@ -83,8 +95,8 @@ class Books extends Component {
             {item.Summary}
           </List.Item>
         )}
-      />
+        />
+      </div>
     )
   }
 }
-export default Books;
