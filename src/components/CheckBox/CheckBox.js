@@ -1,14 +1,16 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import { Checkbox } from "antd";
 
-export default ({ disabled, label, value, handleChange }) => (
-  <Checkbox
-    style={{ display: "inline-block" ,marginLeft:0   }}
-    disabled={disabled || false}
-    label={label}
-    checked={value}
-    onChange={handleChange}
-  >
-    {label}
-  </Checkbox>
-);
+export default ({  label, value, handleChange }) => {
+  return (
+    <Checkbox
+      style={{ display: "inline-block", marginLeft: 0 }}
+      label={label}
+      checked={value}
+      onChange={handleChange}
+    >
+      {label}
+    </Checkbox>
+  );
+};
