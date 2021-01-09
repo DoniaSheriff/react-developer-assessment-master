@@ -1,9 +1,9 @@
 
-const { default: MainPage } = require("./MainPage/MainPage");
+const { default: Books } = require("./Books/Books");
 
 function App() {
   return <div>
-    <MainPage></MainPage>
+    <Books></Books>
   </div>;
 }
 
